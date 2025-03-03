@@ -270,7 +270,7 @@
 
         <div class="input-section">
             <h2>Aggiungi Citazione</h2>
-            <input type="text" id="text" placeholder="Inserisci la citazione" maxlength="200">
+            <input type="text" id="text" placeholder="Inserisci la citazione" maxlength="200" >
             <input type="text" id="author" placeholder="Autore" maxlength="50">
             <input type="text" id="topic" placeholder="Argomento" maxlength="50">
             <button onclick="addQuote()">Aggiungi</button>
@@ -427,14 +427,24 @@
                         </div>
                     </div>
                     <div class="edit-form">
-                        <input type="text" class="edit-text" value="${quote.text}">
-                        <input type="text" class="edit-author" value="${quote.author}">
-                        <input type="text" class="edit-topic" value="${quote.topic}">
+                        <input type="text" class="edit-text" value="${quote.text}" class="edit-input">
+                        <input type="text" class="edit-author" value="${quote.author}" class="edit-input">
+                        <input type="text" class="edit-topic" value="${quote.topic}" class="edit-input">
                         <button onclick="saveEdit(${originalIndex})">Salva</button>
                         <button onclick="cancelEdit(${originalIndex})">Annulla</button>
                     </div>
                 `;
                 list.appendChild(div);
+
+                // Aggiungi listener per il tasto Invio nei campi di modifica
+                const editInputs = div.querySelectorAll('.edit-input');
+                editInputs.forEach(input => {
+                    input.addEventListener('keypress', function(event) {
+                        if (event.key === 'Enter') {
+                            saveEdit(originalIndex);
+                        }
+                    });
+                });
             });
         }
 
@@ -532,6 +542,25 @@
                 }
             }
         }
+
+        // Aggiungi listener per il tasto Invio nei campi di input per "Aggiungi Citazione"
+        document.getElementById('text').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                addQuote();
+            }
+        });
+
+        document.getElementById('author').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                addQuote();
+            }
+        });
+
+        document.getElementById('topic').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                addQuote();
+            }
+        });
 
         // Inizializza la visibilità del pulsante all'avvio
         updateClearButtonVisibility();
