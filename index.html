@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Le Mie Citazioni</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Georgia', serif;
@@ -11,6 +12,11 @@
             margin: 0;
             padding: 30px;
             color: #4a3f35;
+            transition: background-color 0.3s, color 0.3s; /* Transizione per il tema scuro */
+        }
+        body.dark-theme {
+            background-color: #1a1a1a; /* Sfondo scuro */
+            color: #e0e0e0; /* Testo chiaro */
         }
         h1 {
             text-align: center;
@@ -19,12 +25,20 @@
             margin-bottom: 15px;
             font-weight: normal;
             letter-spacing: 1px;
+            transition: color 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme h1 {
+            color: #c9a66b; /* Colore del titolo nel tema scuro (es. un beige dorato) */
         }
         h2 {
             color: #8b5e34;
             font-size: 20px;
             margin-bottom: 15px;
             font-weight: normal;
+            transition: color 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme h2 {
+            color: #c9a66b; /* Colore dei sottotitoli nel tema scuro */
         }
         .container {
             max-width: 700px;
@@ -33,6 +47,11 @@
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s, box-shadow 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme .container {
+            background-color: #2a2a2a; /* Sfondo scuro per il contenitore */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombra più scura */
         }
         .search-section {
             margin-bottom: 25px;
@@ -50,12 +69,22 @@
             font-size: 16px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%238b5e34" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>') no-repeat 12px center;
             background-size: 18px;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, background-color 0.3s, color 0.3s; /* Transizione per il tema scuro */
+            color: #4a3f35; /* Colore del testo in tema chiaro */
+        }
+        .dark-theme .search-section input[type="text"] {
+            border-color: #555; /* Bordo più scuro nel tema scuro */
+            background-color: #333; /* Sfondo scuro per input nel tema scuro */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23e0e0e0" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>'); /* Icona bianca nel tema scuro */
+            color: #e0e0e0; /* Colore del testo in tema scuro */
         }
 
         .search-section input[type="text"]:focus {
             border-color: #c9a66b;
             outline: none;
+        }
+        .dark-theme .search-section input[type="text"]:focus {
+            border-color: #c9a66b; /* Mantiene l'accento dorato anche nel tema scuro */
         }
 
         .clear-search-button {
@@ -71,16 +100,27 @@
             margin: 0;
             outline: none; /* Rimuovi l'outline al focus */
             box-shadow: none; /* Rimuovi l'ombra */
+            transition: color 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme .clear-search-button {
+            color: #e0e0e0; /* Colore chiaro per la X nel tema scuro */
         }
 
         .clear-search-button:hover {
             opacity: 1; /* Aumenta l'opacità al passaggio del mouse */
+            color: #c9a66b; /* Accento dorato al hover */
             background: none; /* Assicurati che non ci sia sfondo al passaggio del mouse */
+        }
+        .dark-theme .clear-search-button:hover {
+            color: #c9a66b; /* Accento dorato al hover anche nel tema scuro */
         }
 
         .clear-search-button:active {
             color: #8b5e34; /* Mantieni lo stesso colore al clic */
             background: none; /* Assicurati che non ci sia sfondo al clic */
+        }
+        .dark-theme .clear-search-button:active {
+            color: #e0e0e0; /* Mantieni il colore chiaro al clic nel tema scuro */
         }
 
         .input-section {
@@ -89,6 +129,11 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
             margin-bottom: 25px;
+            transition: background-color 0.3s, box-shadow 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme .input-section {
+            background-color: #2a2a2a; /* Sfondo scuro per la sezione input */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombra più scura */
         }
         .import-export-section {
             display: flex;
@@ -107,11 +152,20 @@
             box-sizing: border-box;
             font-size: 16px;
             background-color: #fffcf7;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, background-color 0.3s, color 0.3s; /* Transizione per il tema scuro */
+            color: #4a3f35; /* Colore del testo in tema chiaro */
+        }
+        .dark-theme input[type="text"] {
+            border-color: #555; /* Bordo più scuro nel tema scuro */
+            background-color: #333; /* Sfondo scuro per input nel tema scuro */
+            color: #e0e0e0; /* Colore del testo in tema scuro */
         }
         input[type="text"]:focus {
             border-color: #c9a66b;
             outline: none;
+        }
+        .dark-theme input[type="text"]:focus {
+            border-color: #c9a66b; /* Mantiene l'accento dorato anche nel tema scuro */
         }
         button {
             background-color: #c9a66b;
@@ -121,15 +175,32 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.3s, transform 0.2s, color 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme button {
+            background-color: #c9a66b; /* Mantiene il colore dorato nel tema scuro */
+            color: #4a3f35; /* Cambia il colore del testo per contrasto nel tema scuro */
         }
         button:hover {
             background-color: #b5894e;
             transform: translateY(-1px);
         }
+        .dark-theme button:hover {
+            background-color: #b5894e; /* Mantiene l'effetto hover anche nel tema scuro */
+        }
         .import-export-section input[type="file"] {
             padding: 5px;
             font-size: 14px;
+            background-color: #fffcf7; /* Sfondo chiaro per input file */
+            color: #4a3f35; /* Colore testo chiaro per input file */
+            border: 1px solid #d9c2a7; /* Bordo chiaro per input file */
+            border-radius: 8px; /* Bordi arrotondati per input file */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transizioni per input file */
+        }
+        .dark-theme .import-export-section input[type="file"] {
+            background-color: #333; /* Sfondo scuro per input file tema scuro */
+            color: #e0e0e0; /* Colore testo scuro per input file tema scuro */
+            border-color: #555; /* Bordo scuro per input file tema scuro */
         }
         .quote {
             background-color: #fff;
@@ -138,7 +209,11 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
             margin-bottom: 20px;
             position: relative;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme .quote {
+            background-color: #333; /* Sfondo scuro per le citazioni */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombra più scura */
         }
         .quote:hover {
             transform: translateY(-2px);
@@ -150,16 +225,28 @@
             word-wrap: break-word;
             max-width: 75%;
             color: #4a3f35;
+            transition: color 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme .quote-text {
+            color: #e0e0e0; /* Testo chiaro per le citazioni nel tema scuro */
         }
         .quote-author {
             font-size: 15px;
             color: #7a6b5d;
             margin: 0;
+            transition: color 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme .quote-author {
+            color: #a8a8a8; /* Colore più chiaro per l'autore nel tema scuro */
         }
         .quote-topic {
             font-size: 13px;
             color: #a89b8c;
             margin: 5px 0 0 0;
+            transition: color 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme .quote-topic {
+            color: #888; /* Colore ancora più chiaro per l'argomento nel tema scuro */
         }
         .quote-buttons {
             display: flex; /* Sempre visibili */
@@ -172,6 +259,10 @@
             background-color: #d9534f;
             padding: 6px 10px;
             font-size: 13px;
+            transition: background-color 0.3s, color 0.3s; /* Transizione per il tema scuro */
+        }
+        .dark-theme .quote-buttons button {
+            color: #fff; /* Testo bianco per pulsanti nel tema scuro */
         }
         .quote-buttons button:first-child {
             background-color: #f4d35e;
@@ -205,11 +296,41 @@
             font-size: 13px;
             opacity: 0.8;
             border-radius: 8px;
+            transition: background-color 0.3s; /* Transizione per il tema scuro */
         }
         .clear-all-section button:hover {
             background-color: #c9302c;
             opacity: 1;
             transform: translateY(-1px);
+        }
+
+        /* Stili per il tasto tema scuro (aggiunti qui) */
+        #themeToggle {
+            position: fixed; /* Fissa il tasto in una posizione */
+            top: 20px; /* Distanza dal bordo superiore */
+            right: 20px; /* Distanza dal bordo destro */
+            background: none; /* Rimuovi lo sfondo */
+            border: none; /* Rimuovi il bordo */
+            font-size: 24px; /* Dimensione dell'icona */
+            color: #8b5e34; /* Colore dell'icona tema chiaro */
+            cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+            z-index: 1000; /* Assicura che sia sopra altri elementi */
+            transition: color 0.3s ease, transform 0.3s ease; /* Aggiungi transizioni */
+        }
+        .dark-theme #themeToggle {
+            color: #e0e0e0; /* Colore dell'icona tema scuro (bianco/grigio chiaro) */
+        }
+
+        #themeToggle:hover {
+            color: #c9a66b; /* Cambia colore al passaggio del mouse tema chiaro */
+            transform: scale(1.1); /* Effetto di ingrandimento */
+        }
+        .dark-theme #themeToggle:hover {
+            color: #fff; /* Colore bianco al passaggio del mouse tema scuro */
+        }
+
+        #themeToggle:active {
+            transform: scale(0.9); /* Effetto di riduzione al clic */
         }
 
         @media (max-width: 600px) {
@@ -260,6 +381,10 @@
     </style>
 </head>
 <body>
+    <button id="themeToggle" aria-label="Attiva/disattiva tema scuro">
+        <i class="fas fa-moon"></i> <!-- Icona luna per tema scuro -->
+    </button>
+
     <div class="container">
         <h1>Le Mie Citazioni</h1>
 
@@ -532,6 +657,42 @@
                 }
             }
         }
+
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+
+            // Alterna tra tema chiaro e scuro
+            body.classList.toggle('dark-theme');
+
+            // Cambia l'icona in base al tema attivo
+            if (body.classList.contains('dark-theme')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Icona sole per tema chiaro
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Icona luna per tema scuro
+            }
+
+            // Salva la preferenza dell'utente nel localStorage
+            localStorage.setItem('theme', body.classList.contains('dark-theme') ? 'dark' : 'light');
+        }
+
+        // Verifica il tema salvato all'avvio
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Icona sole per tema chiaro
+            } else {
+                body.classList.remove('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Icona luna per tema scuro
+            }
+
+             // Aggiungi event listener al tasto tema scuro SOLO dopo che il DOM è caricato
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        });
 
         // Inizializza la visibilità del pulsante all'avvio
         updateClearButtonVisibility();
